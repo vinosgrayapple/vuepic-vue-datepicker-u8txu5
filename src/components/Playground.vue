@@ -1,6 +1,7 @@
 <template>
   <div>
     <Datepicker v-model="date" monthNameFormat="long" :format-locale="ru" />
+    <!--   -->
   </div>
 </template>
 
@@ -10,6 +11,8 @@ import Datepicker from '@vuepic/vue-datepicker';
 import { uk, ru } from 'date-fns/locale';
 
 export default {
+  components: { Datepicker },
+
   setup() {
     const date = ref(new Date());
     // In case of a range picker, you'll receive [Date, Date]
@@ -25,6 +28,7 @@ export default {
       date,
       format,
       ru,
+      uk,
     };
   },
 };
