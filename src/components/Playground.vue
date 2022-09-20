@@ -1,7 +1,17 @@
 <template>
   <div>
-    <Datepicker v-model="date" monthNameFormat="long" :format-locale="ru" />
-    <!--   -->
+    <Datepicker
+      v-model="date"
+      monthNameFormat="long"
+      :format="format"
+      locale="en"
+      cancelText="Cancel"
+      selectText="Ready"
+      ref="dp"
+    />
+    <template #action-select>
+      <p class="custom-select" @click="selectDate">Select</p>
+    </template>
   </div>
 </template>
 
@@ -15,6 +25,7 @@ export default {
 
   setup() {
     const date = ref(new Date());
+    const dp = ref();
     // In case of a range picker, you'll receive [Date, Date]
     const format = (date) => {
       const day = date.getDate();
@@ -23,12 +34,17 @@ export default {
 
       return `${day}.${month}.${year}`;
     };
+    const selectDate = () => {
+      ref.value.selectDate();
+    };
 
     return {
       date,
+      dp,
       format,
       ru,
       uk,
+      selectDate,
     };
   },
 };
@@ -61,5 +77,11 @@ $dp__month_year_row_height: 40px !default; // height of the month-year select ro
   --dp-icon-color: #959595;
   --dp-danger-color: #ff6f60;
   --dp-highlight-color: rgba(25, 118, 210, 0.1);
+}
+.custom-select {
+  cursor: pointer;
+  color: var(--vp-c-text-2);
+  margin: 0;
+  display: inline-block;
 }
 </style>
