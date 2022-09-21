@@ -14,6 +14,21 @@
       />
     </template>
   </Datepicker>
+  <Datepicker
+    v-model="dateEnd"
+    :action-row-component="actionRow"
+    monthNameFormat="long"
+    format="dd.MM.yyyy"
+    :clearable="false"
+    ref="dp"
+  >
+    <template #input-icon>
+      <img
+        class="input-slot-image"
+        src="data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19.5 3.75H4.5C4.08579 3.75 3.75 4.08579 3.75 4.5V19.5C3.75 19.9142 4.08579 20.25 4.5 20.25H19.5C19.9142 20.25 20.25 19.9142 20.25 19.5V4.5C20.25 4.08579 19.9142 3.75 19.5 3.75Z' stroke='%23595A5B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16.5 2.25V5.25' stroke='%23595A5B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.5 2.25V5.25' stroke='%23595A5B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.75 8.25H20.25' stroke='%23595A5B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A"
+      />
+    </template>
+  </Datepicker>
 </template>
 
 <script>
@@ -26,6 +41,7 @@ export default {
 
   setup() {
     const date = ref(new Date());
+    const dateEnd = ref(new Date());
     const dp = ref();
     // In case of a range picker, you'll receive [Date, Date]
     const format = (date) => {
@@ -44,6 +60,7 @@ export default {
     const actionRow = computed(() => ActionRow);
     return {
       date,
+      dateEnd,
       dp,
       format,
       selectDate,
@@ -103,10 +120,20 @@ $dp__font_family: Inter;
 .dp__input_wrap {
   width: 200px !important;
 }
+.dp__input {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 160%;
+  letter-spacing: 1px;
+  color: #595a5b !important;
+  padding: 8px 10px;
+}
 .dp__input_icon {
   left: 150px;
   right: 0;
-  transform: translateY(-50%);
+  transform: translateY(-45%);
   color: var(--dp-icon-color);
 }
 .dp__input_icon_pad {
